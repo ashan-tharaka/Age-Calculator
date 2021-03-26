@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <title>Age Calculator</title>
+    <link rel="shortcut icon" href="unnamed.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Age Calculator</h1>
+    <div class="container bg-secondary">
+
+        <div class="row">
+            <div class="col-sm-4">
+                <label for="year">Enter Your Both Year</label>
+                <input type="number" for="year" id="email1" name="email" aria-describedby="basic-addon3" class="form-control input-sm" placeholder="Enter Birth Year" required/>
+            </div>
+            <div class="col-sm-4">
+                <label for="month">Enter Your Both Month</label>
+                <input type="number" for="month" id="email2" name="email" aria-describedby="basic-addon3" class="form-control input-sm" placeholder="Enter Birth Month" required/>
+
+            </div>
+            <div class="col-sm-4">
+                <label for="year">Enter Your Both Day</label>
+                <input type="number" for="day" id="email3" name="email" aria-describedby="basic-addon3" class="form-control input-sm" placeholder="Enter Birth Day" required/>
+            </div>
+
+        </div>
+
+        <div class="d-grid gap-4 d-sm-flex justify-content-sm-center">
+            <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold" id="sub">Calculate Age</button>
+            <button type="button" class="btn btn-outline-dark btn-lg px-4" id="reset">Reset BirthDay</button>
+        </div>
+
+        <footer>
+            <div class="d-grid gap-4 d-sm-flex justify-content-sm-center">
+                <label for="today" id="today"></label>
+
+            </div>
+            <div class="d-grid gap-4 d-sm-flex justify-content-sm-center">
+                <label for="age" id="age"></label>
+            </div>
+
+        </footer>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+    <script>
+        $(document).ready(function() {
+            $("#reset").click(function() {
+                $("#email1").val("");
+                $("#email2").val("");
+                $("#email3").val("");
+                $("#age").text("");
+                $("#today").text("");
+            })
+
+            $("#sub").click(function() {
+                if ($("#email1").val != "" && $("#email2").val != "" && $("#email3").val != "") {
+
+                    var today = new Date();
+                    var dd = String(today.getDate()).padStart(2, '0');
+                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                    var yyyy = today.getFullYear();
+
+                    today = yyyy + '/' + mm + '/' + dd;
+                    var year = parseInt($("#email1").val());
+                    var month = parseInt($("#email2").val());
+                    var day = parseInt($("#email3").val());
+
+                    var year1 = parseInt(yyyy);
+                    var month1 = parseInt(mm);
+                    var day1 = parseInt(dd);
+                    if (year1 > year && month <= 12 && day <= 31) {
+                        if (day1 < day) {
+                            ageday = day1 + 30 - day;
+                            month1 = month1 - 1;
+                        } else {
+                            ageday = day1 - day;
+                        }
+
+
+                        if (month1 < month) {
+                            agemonth = month1 + 12 - month;
+                            year1 = year1 - 1;
+                        } else {
+                            agemonth = month1 - month;
+                        }
+
+
+                        ageyear = year1 - year;
+                        $("#today").text("Today is " + String(today));
+                        $("#age").text("Your Age is " + String(ageyear) + " years " + String(agemonth) + " months  and " + String(ageday) + " days");
+
+
+                    } else
+                        window.alert("Wrong input. try agin");
+
+
+
+
+
+
+
+
+                } else {
+                    alert("please enter your birthday according to following structure");
+
+
+                }
+
+
+            })
+
+
+
+        })
+    </script>
+
+
+
+</body>
+
+</html>
